@@ -37,7 +37,7 @@ dependencies {
 /**
  * The stage task used by Heroku-Style PaaS.
  */
-task stage (dependsOn: ["sample-server:build"])
+task stage (dependsOn: ["build"])
 
 
 task wrapper(type: Wrapper) {

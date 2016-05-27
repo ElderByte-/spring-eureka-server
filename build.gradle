@@ -34,6 +34,10 @@ dependencies {
 
 version =  '0.1.0'
 
+jar {
+    baseName = 'spring-eureka-server'
+}
+
 /**
  * The stage task used by Heroku-Style PaaS.
  */

@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
     }
 }
 
@@ -26,14 +26,12 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Brixton.SR4'
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Brixton.SR6'
     }
 }
 
 dependencies {
-    //compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
-
     compile("org.springframework.cloud:spring-cloud-starter-eureka-server")
 
     testCompile("junit:junit")

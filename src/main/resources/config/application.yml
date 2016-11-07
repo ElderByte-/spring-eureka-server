@@ -1,15 +1,15 @@
 server:
   port: ${PORT:8761}
 
-spring.application.name: "eureka-server"
-
 eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
-    server:
-      enableSelfPreservation: true
-      waitTimeInMsWhenSyncEmpty: 0
+    serviceUrl:
+          defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    enableSelfPreservation: true
+    waitTimeInMsWhenSyncEmpty: 0
 
 logging:
     level:

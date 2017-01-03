@@ -26,6 +26,6 @@ security:
   basic:
     enabled: true
   user:
-      name: ${USER}
-      password: ${PASS}
+      name: ${EUREKA_USER}
+      password: ${EUREKA_PASS}
 

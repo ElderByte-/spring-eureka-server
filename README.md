@@ -6,7 +6,7 @@ Spring Cloud / Netflix Eureka Server ready for cloud deployment.
 
 ### Supported Environment Variables
 
-| Env               |      Description      |  Hint      |
+| Env               |      Description      |  Default      |
 |-------------------|:---------------------:|-----------:|
-| EUREKA_USER       |  User name of eureka login credentials    | required |
-| EUREKA_PASS       |  Password of eureka login credentials      |   required |
+| EUREKA_USER       |  User name of eureka login credentials    | admin |
+| EUREKA_PASS       |  Password of eureka login credentials      |   1337 |

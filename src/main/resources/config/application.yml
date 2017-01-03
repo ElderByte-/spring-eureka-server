@@ -22,3 +22,10 @@ endpoints:
   health:
     enabled: true
 
+security:
+  basic:
+    enabled: true
+  user:
+      name: ${EUREKA_USER:admin}
+      password: ${EUREKA_PASS:1337}
+

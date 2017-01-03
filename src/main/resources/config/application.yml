@@ -22,3 +22,10 @@ endpoints:
   health:
     enabled: true
 
+security:
+  basic:
+    enabled: true
+  user:
+      name: ${USER}
+      password: ${PASS}
+

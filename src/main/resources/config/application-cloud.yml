@@ -6,3 +6,13 @@ security:
       name: ${EUREKA_USER:admin}
       password: ${EUREKA_PASS:1337}
 
+eureka:
+  instance:
+    healthCheckUrlPath: /health
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl.defaultZone: ${EUREKA_URL:http://${security.user.name}:${security.user.password}@eureka-web.discoverd:8080/eureka/}
+  server:
+    enableSelfPreservation: ${EUREKA_SELF_PRESERVATION:false}
+    waitTimeInMsWhenSyncEmpty: 0

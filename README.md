@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ElderByte-/spring-eureka-server.svg?branch=master)](https://travis-ci.org/ElderByte-/spring-eureka-server)
+
 # spring-eureka-server
 Spring Cloud / Netflix Eureka Server ready for cloud deployment.
 

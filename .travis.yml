@@ -1,0 +1,35 @@
+sudo: required
+
+services:
+  - docker
+
+language: java
+jdk:
+  - oraclejdk8
+install: echo "skip 'gradle assemble' step"
+script: "./gradlew stage"
+before_install:
+  - chmod +x gradlew
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USER" -p="$DOCKER_PASS";
+    docker push "$DOCKER_IMAGE";
+    fi
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f docker/Dockerfile -t $DOCKER_IMAGE:$COMMIT .
+  - docker tag $DOCKER_IMAGE:$COMMIT $DOCKER_IMAGE:$TAG
+  - docker tag $DOCKER_IMAGE:$COMMIT $DOCKER_IMAGE:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_IMAGE
+env:
+  global:
+    - DOCKER_IMAGE=elderbyte/spring-eureka-server
+    - DOCKER_USER=isnull
+    - secure: RVBToCz1MrwjdqPi1ldS4ApLEkid5bHv5L6UtlfIK1usAYPfpLn38nfQt1FTRRnXBYPIckRcreBE6mX/j6vsFTgzAKwniyHCxVsGGcWcQ2tSBHjT6ygTEWA8/qSKVDkVMHfdOqt1cGq31PZRuJc3AJef0Xigj4gGTNVtuYW7KSDHhGaHmVOosvylFcjpsqqDmteZVpvMumO0VkFAvDcXuREDdYBtxG6JIoBTpDYadVI36KwAbRcMbdW3h6I+5ezkFBm6jhCA8XgNkHYgL/2V55J9O9sy5IkH+E6beY561GfncxW6x78/eSlCZA6tjyEI1eSfgbAwZ/on3YOKSQg6sOWy2t7dsazVxoQmGal3cNsyct796SHWtjGIVN9/tCEnKcQ38Eb24BPsmKE7yQxgSKLmP3kqPIp0xgydszBheHXON25L7aAyVL8Y95bSq+ILciHzxzYrJIhAPPJmPAwLwjVjHQl9SwWSV63Z+34kNszkkKErhhlL1KLE6HKQhnrnC66XnBAidVlFrjxYlirL9rnEdqXNKdMx7bUqPdoK72fWEPk9pYyqrqvWM2KeeD/BHBNKnzUOItT+Cd8K3b9oaaj9jBoB+BoJQQMhjjnghEnPfXNpsuP18q7j3ZZ5mpJ4V0fq6AMLkeuth8FRLeaBmEqaWeREAMYAvP02LrSW2dA=

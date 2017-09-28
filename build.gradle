@@ -45,10 +45,17 @@ jar {
     baseName = 'spring-eureka-server'
 }
 
+
 /**
- * The stage task used by Heroku-Style PaaS.
+ * The stage task
  */
-task stage (dependsOn: ["build"])
+task stage(type: Copy, dependsOn: ['stageBuild']) {
+    from "build/libs/spring-eureka-server-${project.version}.jar"
+    into 'docker'
+    rename { x -> 'app.jar' }
+}
+
+task stageBuild (dependsOn: ["build"])
 
 
 task wrapper(type: Wrapper) {
